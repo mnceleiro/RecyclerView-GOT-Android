@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.murallaromana.pmdm.recyclerviewejemplo.R
+import es.murallaromana.pmdm.recyclerviewejemplo.adapters.ListaPersonajesAdapter
 import es.murallaromana.pmdm.recyclerviewejemplo.databinding.ActivityMainBinding
+import es.murallaromana.pmdm.recyclerviewejemplo.modelo.dao.PersonajesDao
+import es.murallaromana.pmdm.recyclerviewejemplo.modelo.dao.PersonajesDaoMockImpl
 import es.murallaromana.pmdm.recyclerviewejemplo.modelo.entidades.Personaje
 
 class MainActivity : AppCompatActivity() {
@@ -14,15 +17,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Inflo las vistas
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // LayoutManager layoutManager = new LinearLayoutManager(this)
+        // Obtengo los datos de los personajes
+        val personajesDao = PersonajesDaoMockImpl()
+        val listaPersonajes = personajesDao.getTodos()
+
+        // Creo los componentes que necesita el RecyclerView
         val layoutManager = LinearLayoutManager(this)
+        val adapter = ListaPersonajesAdapter(listaPersonajes)
 
-
-        // Prueba personaje
-        val p = Personaje(0, "Daenerys", "Targaryen", "Mother of Dragons", "House Targaryen", "https://thronesapi.com/assets/images/daenerys.jpg")
-        println(p.getNombreCompleto())
+        // Asocio el RecyclerView con sus componentes
+        binding.rvListaPersonajes.adapter = adapter
+        binding.rvListaPersonajes.layoutManager = layoutManager
     }
 }
