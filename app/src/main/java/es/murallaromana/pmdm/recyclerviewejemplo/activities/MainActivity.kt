@@ -32,5 +32,8 @@ class MainActivity : AppCompatActivity() {
         // Asocio el RecyclerView con sus componentes
         binding.rvListaPersonajes.adapter = adapter
         binding.rvListaPersonajes.layoutManager = layoutManager
+
+        // Si la lista no va a cambiar
+        binding.rvListaPersonajes.setHasFixedSize(true)
     }
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import es.murallaromana.pmdm.recyclerviewejemplo.R
 import es.murallaromana.pmdm.recyclerviewejemplo.modelo.entidades.Personaje
 
@@ -29,6 +30,10 @@ class ListaPersonajesAdapter(val personajes: List<Personaje>) : RecyclerView.Ada
 
         holder.tvNombre.setText(personaje.nombre)
         holder.tvTitulo.setText(personaje.titulo)
+
+        Picasso.get()
+            .load(personaje.url)
+            .into(holder.ivFoto)
     }
 
     override fun getItemCount() = personajes.size
