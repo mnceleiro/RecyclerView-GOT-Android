@@ -1,5 +1,7 @@
 package es.murallaromana.pmdm.recyclerviewejemplo.modelo.entidades
 
+import java.io.Serializable
+
 class Personaje(
     var id: Long,
     var nombre: String,
@@ -8,7 +10,7 @@ class Personaje(
     var familia: String,
     var url: String,
     var descripcion: String = ""
-) {
+): Serializable {
 
     fun getNombreCompleto(): String {
         return nombre + " " + apellido
